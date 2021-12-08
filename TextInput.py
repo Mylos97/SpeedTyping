@@ -38,7 +38,6 @@ class TextInput:
                 self.current_word = ''
             elif event.unicode in self.alphabet:
                 self.current_word += event.unicode
-            print(event)
 
     def draw(self):
         Display.SCREEN.blit(self.outer_box, (0, 0))

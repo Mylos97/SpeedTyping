@@ -28,7 +28,7 @@ class Word:
         else:
             self.render_word = self.font.render(self.word, False, (0, 0, 0))
 
-        if self.pos[1] < 16:
+        if self.pos[1] < 32:
             self.removeable = True
 
     def draw(self):

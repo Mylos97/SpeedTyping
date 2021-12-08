@@ -36,7 +36,13 @@ class ScoreBoard:
         self.health -= 0.1
         self.health_green_img = pygame.Surface((
             Display.WINDOW_SIZE[0]*self.health, 6))
-        self.health_green_img.fill((0, 255, 0))
+        color = ((0, 255, 0))
+        if self.health < 0.4:
+            color = (255, 255, 0)
+        if self.health < 0.2:
+            color = (255, 0, 0)
+
+        self.health_green_img.fill(color)
 
     def draw(self):
         Display.SCREEN.blit(self.words_per_minute_title,
