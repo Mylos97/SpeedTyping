@@ -1,5 +1,8 @@
 import pygame
 from Display import *
+from StateHandler import *
+from GameState import *
+from Mediator import *
 
 
 class ScoreBoard:
@@ -33,15 +36,26 @@ class ScoreBoard:
         self.score_render = self.font.render(str(self.score), False, (0, 0, 0))
 
     def decrease_health(self):
-        self.health -= 0.1
-        self.health_green_img = pygame.Surface((
-            Display.WINDOW_SIZE[0]*self.health, 6))
+        self.health -= 0.2
         color = ((0, 255, 0))
         if self.health < 0.4:
             color = (255, 255, 0)
         if self.health < 0.2:
             color = (255, 0, 0)
 
+        if self.health <= 0:
+            self.health = 1
+            self.score = 0
+            self.words_per_minute.clear()
+            StateHandler.STATE = GameState.STATE_MENU
+            Mediator.clear_words()
+            self.health_green_img = pygame.Surface((
+                Display.WINDOW_SIZE[0]*self.health, 6))
+            self.health_green_img.fill((0, 255, 0))
+            return
+
+        self.health_green_img = pygame.Surface((
+            Display.WINDOW_SIZE[0]*self.health, 6))
         self.health_green_img.fill(color)
 
     def draw(self):

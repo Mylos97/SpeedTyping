@@ -62,6 +62,9 @@ while running:
             if event.type == pygame.QUIT:
                 running = False
 
+    if StateHandler.STATE == GameState.STATE_DONE:
+        running = False
+
     pygame.display.update()
 
 
