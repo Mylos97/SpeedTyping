@@ -1,0 +1,9 @@
+{
+    "scores":[
+        {"score":234, "name":"MAR"},
+        {"score":490, "name":"AAA"},
+        {"score":10, "name":"ABC"},
+        {"score":123, "name":"MAS"},
+        {"score":80, "name":"FED"}
+    ]
+}

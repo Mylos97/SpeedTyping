@@ -45,3 +45,6 @@ class WordGenerator:
             print(pos)
             Mediator.OBJECTS.append(
                 Word(pos, word))
+
+    def reset(self):
+        self.difficulty_scalar = 0

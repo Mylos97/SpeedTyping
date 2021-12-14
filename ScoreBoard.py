@@ -7,13 +7,14 @@ from Mediator import *
 
 class ScoreBoard:
 
-    def __init__(self):
+    def __init__(self, reset_word_generator):
         self.font = pygame.font.Font("Resources/Quinquefive-Ea6d4.ttf", 32)
         self.score = 0
         self.words_per_minute = []
         self.update_timer = 0
         self.seconds = 0
         self.words_per_minute_scalar = 10
+        self.reset_word_generator = reset_word_generator
         self.words_per_minute_title = self.font.render(
             'WPM:', False, (0, 0, 0))
         self.words_per_minute_render = self.font.render(
@@ -27,11 +28,13 @@ class ScoreBoard:
 
     def increment_score(self):
         self.score += 1
+        StateHandler.SCORE += 1
         self.score_render = self.font.render(str(self.score), False, (0, 0, 0))
         self.words_per_minute.append({'seconds': self.seconds})
 
     def decrease_score(self):
         if self.score > 0:
+            StateHandler.SCORE -= 1
             self.score -= 1
         self.score_render = self.font.render(str(self.score), False, (0, 0, 0))
 
@@ -47,6 +50,7 @@ class ScoreBoard:
             self.health = 1
             self.score = 0
             self.words_per_minute.clear()
+            self.reset_word_generator()
             StateHandler.STATE = GameState.STATE_MENU
             Mediator.clear_words()
             self.health_green_img = pygame.Surface((

@@ -7,6 +7,7 @@ from ScoreBoard import *
 from StateHandler import *
 from GameState import *
 from Menu import *
+from HiScoreScreen import *
 
 pygame.init()
 pygame.display.set_caption('Speed Typer')
@@ -24,7 +25,9 @@ def check_words():
 
 text_input = TextInput(check_words)
 word_generator = WordGenerator()
-score_board = ScoreBoard()
+score_board = ScoreBoard(word_generator.reset)
+hi_score_screen = HiScoreScreen()
+
 menu = Menu()
 clock = pygame.time.Clock()
 timer = 0
@@ -55,12 +58,18 @@ while running:
         score_board.draw()
 
     if StateHandler.STATE == GameState.STATE_MENU:
-        menu.draw()
-
         for event in pygame.event.get():
             menu.loop(event)
             if event.type == pygame.QUIT:
                 running = False
+        menu.draw()
+
+    if StateHandler.STATE == GameState.STATE_HI_SCORE:
+        for event in pygame.event.get():
+            hi_score_screen.loop(event)
+            if event.type == pygame.QUIT:
+                running = False
+        hi_score_screen.draw()
 
     if StateHandler.STATE == GameState.STATE_DONE:
         running = False
